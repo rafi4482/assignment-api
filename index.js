@@ -1,5 +1,3 @@
-console.log('hello')
-
 const searchBook = ()=>{
 
 const searchField=document.getElementById('search-field')
