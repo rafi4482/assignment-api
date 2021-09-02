@@ -13,20 +13,19 @@ searchField.value=''
 const url=`http://openlibrary.org/search.json?q=${searchText}`
 fetch(url)
 .then(res=>res.json())
-.then(data=>display(data.docs))
+.then(data=>display(data))
 }
 // display data
 const display = doc =>{
 const searchResult = document.getElementById('search-result')
 searchResult.innerHTML=''
-if(doc.length===0){
+if(doc.docs.length===0){
   error1.innerText="nothing found"
 }
-doc.forEach(docu=>{
+doc.docs.forEach(docu=>{
 const div = document.createElement('div')
 const bn = document.getElementById('booknumber')
-bn.innerText=`Total Results Found:${doc.length}`;
-bn.innerText=''
+bn.innerText=`Total Results Found:${doc.numFound}`;
 div.classList.add('col')
 div.innerHTML =`
 <div class="card h-100">
@@ -38,7 +37,6 @@ div.innerHTML =`
           <p><b>First Publish Year:</b>${docu.first_publish_year}</p>
           </div>
       </div>
-
 `
 searchResult.appendChild(div)
 })
